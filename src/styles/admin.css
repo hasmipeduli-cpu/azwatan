@@ -1,0 +1,588 @@
+/* Admin Dashboard & Management Styles */
+
+.az-admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F7F6F2;
+}
+
+/* Sidebar */
+.az-admin-sidebar {
+  width: 250px;
+  background-color: var(--emerald-900);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  flex-shrink: 0;
+}
+
+.az-admin-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.az-admin-sidebar-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.az-admin-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background-color: var(--gold-500);
+  color: var(--emerald-900);
+  text-transform: uppercase;
+}
+
+.az-admin-nav {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.az-admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.az-admin-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.az-admin-nav-item.active {
+  background-color: var(--emerald-700);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.az-admin-sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Main Content Area */
+.az-admin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.az-admin-topbar {
+  height: 64px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.az-admin-page-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+}
+
+.az-admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text-body);
+}
+
+.az-admin-main-body {
+  padding: 28px;
+  flex: 1;
+}
+
+/* Stats Cards (PRD #26) */
+.az-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.az-stat-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.az-stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.az-stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.az-stat-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--emerald-900);
+}
+
+.az-stat-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background-color: var(--emerald-50);
+  color: var(--emerald-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Admin Action Bar */
+.az-admin-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.az-admin-filters-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.az-admin-select {
+  background-color: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--text-main);
+  outline: none;
+}
+
+.az-admin-select:focus {
+  border-color: var(--emerald-700);
+}
+
+.az-admin-search-input {
+  background-color: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--text-main);
+  outline: none;
+  min-width: 220px;
+}
+
+.az-admin-search-input:focus {
+  border-color: var(--emerald-700);
+}
+
+.az-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--emerald-800);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(15, 76, 58, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.az-btn-primary:hover {
+  background-color: var(--emerald-700);
+  transform: translateY(-1px);
+}
+
+.az-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffffff;
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.az-btn-secondary:hover {
+  background-color: var(--bg-subtle);
+  border-color: var(--text-muted);
+}
+
+/* Table (PRD #27) */
+.az-table-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.az-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.az-table th {
+  background-color: var(--bg-subtle);
+  padding: 12px 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--emerald-900);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.az-table td {
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+
+.az-table tr:hover td {
+  background-color: var(--emerald-50);
+}
+
+.az-table-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background-color: var(--bg-subtle);
+}
+
+/* Status Pills */
+.az-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.az-status-pill.published {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.az-status-pill.draft {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+/* Action Buttons inside Table */
+.az-table-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.az-action-icon-btn {
+  background: none;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-body);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.az-action-icon-btn:hover {
+  background-color: var(--emerald-100);
+  color: var(--emerald-800);
+  border-color: var(--emerald-600);
+}
+
+.az-action-icon-btn.delete:hover {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+/* Form Styling (PRD #28, #33, #56) */
+.az-form-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  padding: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-subtle);
+}
+
+.az-form-group {
+  margin-bottom: 22px;
+}
+
+.az-form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--emerald-900);
+  margin-bottom: 8px;
+}
+
+.az-form-label .required {
+  color: var(--color-danger);
+}
+
+.az-form-input,
+.az-form-textarea,
+.az-form-select {
+  width: 100%;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.az-form-input:focus,
+.az-form-textarea:focus,
+.az-form-select:focus {
+  border-color: var(--emerald-700);
+  box-shadow: 0 0 0 3px rgba(15, 76, 58, 0.1);
+}
+
+.az-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .az-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Upload Dropzone (PRD #29 & #31) */
+.az-upload-zone {
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  background-color: var(--bg-subtle);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.az-upload-zone:hover,
+.az-upload-zone.drag-active {
+  border-color: var(--emerald-600);
+  background-color: var(--emerald-50);
+}
+
+.az-upload-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: var(--emerald-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Upload Progress Bar (PRD #32) */
+.az-upload-progress-wrap {
+  margin-top: 12px;
+}
+
+.az-upload-progress-bar {
+  height: 8px;
+  background-color: var(--border-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.az-upload-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--emerald-700), var(--gold-500));
+  transition: width 0.2s ease;
+}
+
+.az-upload-progress-text {
+  font-size: 0.8rem;
+  color: var(--text-body);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+/* Modal Confirmation (PRD #34) */
+.az-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(7, 35, 27, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.az-modal-box {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: var(--shadow-modal);
+  animation: modal-pop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-pop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.az-modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+  margin-bottom: 10px;
+}
+
+.az-modal-desc {
+  font-size: 0.92rem;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.az-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Toast Notifications (PRD #66) */
+.az-toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.az-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(7, 35, 27, 0.15);
+  animation: toast-in 0.3s ease;
+  background-color: #ffffff;
+  border-left: 4px solid var(--emerald-700);
+  color: var(--text-main);
+}
+
+.az-toast.success {
+  border-left-color: var(--color-success);
+}
+
+.az-toast.error {
+  border-left-color: var(--color-danger);
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

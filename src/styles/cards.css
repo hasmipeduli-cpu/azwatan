@@ -1,0 +1,247 @@
+/* Song Card & Grid Styles (PRD #14) */
+
+.az-song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 640px) {
+  .az-song-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+  }
+}
+
+.az-song-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--shadow-subtle);
+}
+
+.az-song-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-hover);
+}
+
+.az-song-card.is-active {
+  border-color: var(--emerald-600);
+  box-shadow: 0 4px 18px rgba(15, 76, 58, 0.15);
+  background-color: var(--emerald-50);
+}
+
+/* Cover Image Container */
+.az-card-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.az-card-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.az-song-card:hover .az-card-cover {
+  transform: scale(1.04);
+}
+
+/* Featured Badge Over Cover */
+.az-badge-featured {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(12, 54, 42, 0.85);
+  backdrop-filter: blur(6px);
+  color: var(--gold-400);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(216, 175, 62, 0.3);
+  z-index: 2;
+}
+
+/* Play Overlay Button */
+.az-card-play-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--emerald-800);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(7, 35, 27, 0.3);
+  transition: all var(--transition-fast);
+  opacity: 0.92;
+  transform: translateY(0);
+  z-index: 3;
+}
+
+.az-song-card:hover .az-card-play-btn {
+  opacity: 1;
+  transform: scale(1.08);
+  background-color: var(--emerald-700);
+}
+
+.az-song-card.is-active .az-card-play-btn {
+  opacity: 1;
+  background-color: var(--gold-500);
+  color: var(--emerald-900);
+}
+
+/* Card Body */
+.az-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .az-card-body {
+    padding: 10px 12px 14px;
+  }
+}
+
+.az-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.az-song-card.is-active .az-card-title {
+  color: var(--emerald-800);
+}
+
+.az-card-artist {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+/* Metadata Badges */
+.az-card-meta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.az-tag-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-subtle);
+  color: var(--text-body);
+}
+
+.az-tag-pill.lang {
+  background-color: var(--emerald-50);
+  color: var(--emerald-800);
+}
+
+.az-card-dot {
+  font-size: 0.7rem;
+  color: var(--text-light);
+}
+
+/* Sound Wave Animation for Active Playing Song */
+.az-soundwave {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.az-soundwave-bar {
+  width: 3px;
+  background-color: currentColor;
+  border-radius: 2px;
+  animation: wave 1s ease-in-out infinite alternate;
+}
+
+.az-soundwave-bar:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+.az-soundwave-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+.az-soundwave-bar:nth-child(3) { height: 100%; animation-delay: 0.2s; }
+.az-soundwave-bar:nth-child(4) { height: 50%; animation-delay: 0.4s; }
+
+@keyframes wave {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}
+
+/* Skeleton Loader (PRD #22) */
+.az-skeleton {
+  background: linear-gradient(90deg, #f0eee8 25%, #f8f7f2 50%, #f0eee8 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.az-skeleton-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.az-skeleton-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.az-skeleton-content {
+  padding: 16px;
+}
+
+.az-skeleton-line {
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.az-skeleton-line.short {
+  width: 60%;
+}
+
+.az-skeleton-line.tiny {
+  width: 40%;
+  height: 10px;
+  margin-top: 14px;
+}

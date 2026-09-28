@@ -1,0 +1,70 @@
+:root {
+  /* Warm Spiritual Color Palette (PRD #46 & #47) */
+  --bg-main: #FBFBFA;
+  --bg-subtle: #F5F3EC;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+
+  /* Primary Deep Emerald */
+  --emerald-900: #07231B;
+  --emerald-800: #0C362A;
+  --emerald-700: #0F4C3A;
+  --emerald-600: #15624B;
+  --emerald-500: #1D7A5E;
+  --emerald-100: #E6F2ED;
+  --emerald-50: #F2F8F5;
+
+  /* Accent Muted Gold */
+  --gold-700: #9E7B1D;
+  --gold-600: #B89024;
+  --gold-500: #C59B27;
+  --gold-400: #D8AF3E;
+  --gold-100: #FBF3DC;
+  --gold-50: #FCF8EC;
+
+  /* Neutral Charcoal & Slate */
+  --text-main: #18221E;
+  --text-body: #45544E;
+  --text-muted: #7E8D87;
+  --text-light: #A3B0AA;
+
+  /* Borders & Dividers */
+  --border-light: #EAE7DE;
+  --border-medium: #DAD6CB;
+  --border-focus: #0F4C3A;
+
+  /* Feedback Colors */
+  --color-success: #15803D;
+  --color-success-bg: #DCFCE7;
+  --color-danger: #B91C1C;
+  --color-danger-bg: #FEE2E2;
+  --color-warning: #B45309;
+  --color-warning-bg: #FEF3C7;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Amiri', Georgia, serif;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-subtle: 0 1px 3px rgba(15, 30, 24, 0.05);
+  --shadow-card: 0 4px 16px -2px rgba(15, 30, 24, 0.06), 0 1px 3px rgba(15, 30, 24, 0.04);
+  --shadow-hover: 0 10px 25px -4px rgba(15, 30, 24, 0.1), 0 4px 10px -2px rgba(15, 30, 24, 0.04);
+  --shadow-player: 0 -4px 24px rgba(12, 38, 28, 0.1);
+  --shadow-modal: 0 20px 40px rgba(7, 35, 27, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Heights */
+  --header-height: 72px;
+  --player-height: 84px;
+}

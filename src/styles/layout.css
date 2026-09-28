@@ -1,0 +1,424 @@
+/* Layout & Core Navigation Styles */
+
+.az-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* App Header */
+.az-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  background: rgba(251, 251, 250, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-normal);
+}
+
+.az-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.az-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--emerald-800);
+}
+
+.az-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-400);
+  box-shadow: 0 2px 6px rgba(15, 76, 58, 0.2);
+}
+
+.az-brand-text {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--emerald-900);
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.az-brand-tagline {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--gold-600);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.az-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.az-nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-body);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.az-nav-link:hover {
+  color: var(--emerald-700);
+  background-color: var(--emerald-50);
+}
+
+.az-nav-link.active {
+  color: var(--emerald-800);
+  font-weight: 600;
+  background-color: var(--emerald-100);
+}
+
+.az-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--emerald-800);
+  background-color: transparent;
+  border: 1px solid var(--border-medium);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.az-admin-btn:hover {
+  background-color: var(--emerald-800);
+  color: #ffffff;
+  border-color: var(--emerald-800);
+}
+
+/* Hero Section (PRD #8) */
+.az-hero {
+  padding: 56px 0 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.az-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background-color: var(--gold-50);
+  border: 1px solid var(--gold-100);
+  color: var(--gold-700);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+
+.az-hero-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.2rem);
+  font-weight: 800;
+  color: var(--emerald-900);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.az-hero-title span {
+  color: var(--gold-600);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.az-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  max-width: 540px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+/* Search Bar (PRD #9) */
+.az-search-wrapper {
+  max-width: 580px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.az-search-box {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  padding: 6px 10px 6px 20px;
+  box-shadow: 0 4px 20px -2px rgba(15, 76, 58, 0.08);
+  transition: all var(--transition-fast);
+}
+
+.az-search-box:focus-within {
+  border-color: var(--emerald-600);
+  box-shadow: 0 6px 24px -2px rgba(15, 76, 58, 0.16);
+}
+
+.az-search-icon {
+  color: var(--text-muted);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.az-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-main);
+  background: transparent;
+}
+
+.az-search-input::placeholder {
+  color: var(--text-light);
+}
+
+.az-search-clear {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.az-search-clear:hover {
+  color: var(--text-main);
+}
+
+/* Filter Sections (PRD #10 & #11) */
+.az-filter-section {
+  margin: 28px 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.az-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.az-filter-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--emerald-800);
+  min-width: 65px;
+}
+
+.az-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.az-filter-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.az-pill-btn {
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-body);
+  background-color: #ffffff;
+  border: 1px solid var(--border-light);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.az-pill-btn:hover {
+  border-color: var(--emerald-600);
+  color: var(--emerald-800);
+  background-color: var(--emerald-50);
+}
+
+.az-pill-btn.active {
+  background-color: var(--emerald-800);
+  border-color: var(--emerald-800);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(15, 76, 58, 0.25);
+}
+
+/* Section Titles */
+.az-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.az-section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.az-section-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-600);
+}
+
+.az-section-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+  letter-spacing: -0.01em;
+}
+
+.az-section-count {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Empty State (PRD #21) */
+.az-empty-state {
+  text-align: center;
+  padding: 64px 20px;
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1.5px dashed var(--border-medium);
+  margin: 30px 0;
+}
+
+.az-empty-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.az-empty-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--emerald-900);
+  margin-bottom: 6px;
+}
+
+.az-empty-desc {
+  font-size: 0.92rem;
+  color: var(--text-body);
+  max-width: 380px;
+  margin: 0 auto 20px;
+}
+
+.az-btn-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background-color: var(--emerald-800);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.az-btn-reset:hover {
+  background-color: var(--emerald-700);
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.az-footer {
+  margin-top: 80px;
+  padding: 48px 0 110px; /* bottom padding ensures bottom player never overlaps footer */
+  border-top: 1px solid var(--border-light);
+  background-color: #ffffff;
+}
+
+.az-footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.az-footer-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.az-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.az-footer-link {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.az-footer-link:hover {
+  color: var(--emerald-700);
+}
