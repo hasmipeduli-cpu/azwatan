@@ -1,0 +1,11 @@
+# Azwatan SPA fallback (Apache/LiteSpeed on Hostinger)
+# Serve real files/directories directly; everything else is a
+# client-side route and must load the React app entry point.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
