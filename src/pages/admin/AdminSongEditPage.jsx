@@ -13,7 +13,16 @@ import {
 } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { DatabaseService } from '../../services/database';
-import { uploadFile, extractAudioDuration } from '../../services/storage';
+import {
+  uploadFile,
+  extractAudioDuration,
+  useResolvedStorageUrl,
+  deleteFile,
+  isStoragePath,
+  MAX_AUDIO_SIZE_BYTES,
+  MAX_COVER_SIZE_BYTES,
+  ALLOWED_AUDIO_EXTENSIONS,
+} from '../../services/storage';
 
 export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
   const isEditing = Boolean(songId);
@@ -48,6 +57,10 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
   const coverInputRef = useRef(null);
   const audioInputRef = useRef(null);
 
+  // coverUrl/audioUrl hold a storage path (e.g. "covers/new-abc.jpg")
+  // or a static/external URL — resolve storage paths for preview.
+  const coverPreviewUrl = useResolvedStorageUrl(coverUrl);
+
   useEffect(() => {
     setLanguages(DatabaseService.getLanguages().filter((l) => l.id !== 'all'));
     setTypes(DatabaseService.getTypes().filter((t) => t.id !== 'all'));
@@ -71,7 +84,7 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
     }
   }, [songId, isEditing]);
 
-  // Handle Cover Upload (PRD #31)
+  // Handle Cover Upload (PRD #30, #31)
   const handleCoverFile = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -81,13 +94,27 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
       return;
     }
 
+    if (file.size > MAX_COVER_SIZE_BYTES) {
+      showToast(
+        `Ukuran cover melebihi batas ${Math.round(MAX_COVER_SIZE_BYTES / (1024 * 1024))} MB.`,
+        'error'
+      );
+      return;
+    }
+
     setCoverUploading(true);
     setCoverProgress(10);
     try {
+      const previousCover = coverUrl;
       const uploaded = await uploadFile(file, 'covers', songId || 'new', (p) => {
         setCoverProgress(p);
       });
-      setCoverUrl(uploaded.url);
+      // Persist the storage PATH, never the temporary blob: URL —
+      // the path is resolved back to a URL whenever it is displayed.
+      setCoverUrl(uploaded.path);
+      if (isStoragePath(previousCover) && previousCover !== uploaded.path) {
+        deleteFile(previousCover);
+      }
       showToast('Cover berhasil diunggah.');
     } catch (err) {
       console.error(err);
@@ -102,10 +129,20 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Check extension & mime type
-    const isValidAudio = file.type.startsWith('audio/') || file.name.endsWith('.mp3') || file.name.endsWith('.wav');
+    // Check extension (case-insensitive) & mime type, and size (PRD #30)
+    const ext = file.name.split('.').pop().toLowerCase();
+    const isValidAudio =
+      file.type.startsWith('audio/') || ALLOWED_AUDIO_EXTENSIONS.includes(ext);
     if (!isValidAudio) {
       showToast('Format audio harus berupa .mp3 atau .wav.', 'error');
+      return;
+    }
+
+    if (file.size > MAX_AUDIO_SIZE_BYTES) {
+      showToast(
+        `Ukuran audio melebihi batas ${Math.round(MAX_AUDIO_SIZE_BYTES / (1024 * 1024))} MB.`,
+        'error'
+      );
       return;
     }
 
@@ -121,11 +158,16 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
       }
 
       // 2. Upload with progress bar (PRD #32)
+      const previousAudio = audioUrl;
       const uploaded = await uploadFile(file, 'audio', songId || 'new', (p) => {
         setAudioProgress(p);
       });
 
-      setAudioUrl(uploaded.url);
+      // Persist the storage PATH, never the temporary blob: URL
+      setAudioUrl(uploaded.path);
+      if (isStoragePath(previousAudio) && previousAudio !== uploaded.path) {
+        deleteFile(previousAudio);
+      }
       showToast('Audio berhasil diunggah.');
     } catch (err) {
       console.error(err);
@@ -229,9 +271,9 @@ export default function AdminSongEditPage({ songId, onNavigate, showToast }) {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-                {coverUrl ? (
+                {coverPreviewUrl ? (
                   <img
-                    src={coverUrl}
+                    src={coverPreviewUrl}
                     alt="Preview Cover"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

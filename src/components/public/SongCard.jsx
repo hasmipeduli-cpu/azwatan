@@ -1,6 +1,7 @@
 import React from 'react';
 import { Play, Pause, Sparkles } from 'lucide-react';
 import { useAudio } from '../../context/AudioContext';
+import StorageImage from '../common/StorageImage';
 
 export default function SongCard({ song, currentQueue }) {
   const { activeSong, isPlaying, playSong, togglePlayPause } = useAudio();
@@ -18,29 +19,19 @@ export default function SongCard({ song, currentQueue }) {
   };
 
   return (
-    <article 
+    <article
       className={`az-song-card ${isCurrentSong ? 'is-active' : ''}`}
-      onClick={handlePlayClick}
-      role="button"
-      tabIndex={0}
       aria-label={`${song.title} oleh ${song.artist}`}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handlePlayClick(e);
-        }
-      }}
     >
-      {/* Cover Image Container */}
+      {/* Cover Image Container. Only the play button is interactive —
+          the card itself is not a button (nested interactive elements
+          are an accessibility anti-pattern). */}
       <div className="az-card-cover-wrap">
-        <img
+        <StorageImage
           src={song.coverUrl || '/covers/cover-arab.jpg'}
           alt={`Sampul ${song.title}`}
           className="az-card-cover"
           loading="lazy"
-          onError={(e) => {
-            e.currentTarget.src = '/covers/cover-arab.jpg';
-          }}
         />
 
         {song.featured && (

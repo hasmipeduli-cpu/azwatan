@@ -10,6 +10,7 @@ import {
   Sparkles 
 } from 'lucide-react';
 import { useAudio } from '../../context/AudioContext';
+import StorageImage from '../common/StorageImage';
 
 export default function PersistentBottomPlayer() {
   const {
@@ -75,13 +76,10 @@ export default function PersistentBottomPlayer() {
       <div className="az-container az-player-inner">
         {/* Left: Song Artwork & Details */}
         <div className="az-player-track">
-          <img
+          <StorageImage
             src={activeSong.coverUrl || '/covers/cover-arab.jpg'}
             alt={activeSong.title}
             className="az-player-cover"
-            onError={(e) => {
-              e.currentTarget.src = '/covers/cover-arab.jpg';
-            }}
           />
           <div className="az-player-meta">
             <h4 className="az-player-title" title={activeSong.title}>

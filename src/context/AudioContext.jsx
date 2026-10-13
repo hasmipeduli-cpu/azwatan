@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
+import { resolveStorageUrl } from '../services/storage';
 
 const AudioContext = createContext();
 
@@ -76,20 +77,26 @@ export function AudioProvider({ children }) {
 
   // Update MediaSession API for lockscreen & notification controls
   useEffect(() => {
-    if ('mediaSession' in navigator && activeSong) {
+    if (!('mediaSession' in navigator) || !activeSong) return undefined;
+    let cancelled = false;
+    resolveStorageUrl(activeSong.coverUrl || '/favicon.svg').then((artworkSrc) => {
+      if (cancelled) return;
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeSong.title,
         artist: activeSong.artist,
         album: 'Azwatan Nasyid Library',
         artwork: [
-          { src: activeSong.coverUrl || '/favicon.svg', sizes: '512x512', type: 'image/jpeg' },
+          { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' },
         ],
       });
-    }
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [activeSong]);
 
   // Handle Play Song
-  const playSong = useCallback((song, customQueue) => {
+  const playSong = useCallback(async (song, customQueue) => {
     if (!song) return;
 
     if (customQueue && Array.isArray(customQueue)) {
@@ -116,7 +123,17 @@ export function AudioProvider({ children }) {
     setIsLoadingAudio(true);
     setPlaybackError(null);
 
-    audio.src = song.audioUrl;
+    // song.audioUrl may be an IndexedDB storage path ("audio/...")
+    // for uploaded songs — resolve it to a live blob: URL first.
+    // Static paths ("/audio/...") and external URLs pass through.
+    const src = await resolveStorageUrl(song.audioUrl);
+    // The user may have switched songs while we were resolving
+    if (!src || src.startsWith('audio/') || src.startsWith('covers/')) {
+      setIsLoadingAudio(false);
+      setPlaybackError('Audio tidak dapat diputar. Silakan coba lagi.');
+      return;
+    }
+    audio.src = src;
     audio.volume = isMuted ? 0 : volume;
     audio.play().catch((err) => {
       console.warn('Audio play request failed:', err);
