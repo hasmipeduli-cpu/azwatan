@@ -44,6 +44,15 @@ export default function AdminLayout({
 
   return (
     <div className="az-admin-layout">
+      {/* Backdrop for the off-canvas sidebar on mobile */}
+      {isMobileMenuOpen && (
+        <div
+          className="az-admin-backdrop"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
       <aside className={`az-admin-sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="az-admin-sidebar-brand">
@@ -111,9 +120,10 @@ export default function AdminLayout({
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button
               type="button"
-              className="az-action-icon-btn"
+              className="az-action-icon-btn az-mobile-menu-btn"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              style={{ display: 'none' }} // can be toggled on mobile via CSS
+              aria-label={isMobileMenuOpen ? 'Tutup menu admin' : 'Buka menu admin'}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>

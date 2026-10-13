@@ -586,3 +586,68 @@
     opacity: 1;
   }
 }
+
+/* Mobile admin navigation: hamburger is desktop-hidden, and below
+   860px the sidebar becomes an off-canvas drawer. Previously the
+   `mobile-open` class had no CSS at all and the hamburger button was
+   inline-hidden forever, so the sidebar could never be toggled. */
+.az-mobile-menu-btn {
+  display: none;
+}
+
+.az-admin-backdrop {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .az-mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  .az-admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    max-width: 82vw;
+    z-index: 300;
+    transform: translateX(-105%);
+    transition: transform var(--transition-normal);
+    overflow-y: auto;
+  }
+
+  .az-admin-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-modal);
+  }
+
+  .az-admin-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(7, 35, 27, 0.45);
+    z-index: 290;
+  }
+
+  .az-admin-main-body {
+    padding: 18px 14px;
+  }
+
+  .az-admin-topbar {
+    padding: 0 14px;
+  }
+
+  .az-admin-user-info span {
+    display: none;
+  }
+
+  /* Wide admin tables scroll horizontally instead of crushing columns */
+  .az-table-card {
+    overflow-x: auto;
+  }
+
+  .az-table {
+    min-width: 640px;
+  }
+}

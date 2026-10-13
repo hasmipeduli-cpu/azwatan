@@ -11,6 +11,8 @@ import {
 import AdminLayout from '../../components/admin/AdminLayout';
 import DeleteConfirmModal from '../../components/admin/DeleteConfirmModal';
 import { DatabaseService } from '../../services/database';
+import StorageImage from '../../components/common/StorageImage';
+import { deleteFile } from '../../services/storage';
 
 export default function AdminSongsPage({ onNavigate, showToast }) {
   const [songs, setSongs] = useState([]);
@@ -92,6 +94,9 @@ export default function AdminSongsPage({ onNavigate, showToast }) {
   const handleDeleteConfirm = () => {
     if (deleteTarget) {
       DatabaseService.deleteSong(deleteTarget.id);
+      // Also remove the stored audio/cover files, if any (PRD #62)
+      deleteFile(deleteTarget.audioUrl);
+      deleteFile(deleteTarget.coverUrl);
       showToast('Nasyid berhasil dihapus.');
       setDeleteTarget(null);
       loadData();
@@ -223,13 +228,10 @@ export default function AdminSongsPage({ onNavigate, showToast }) {
               {filteredSongs.map((song) => (
                 <tr key={song.id}>
                   <td>
-                    <img
+                    <StorageImage
                       src={song.coverUrl || '/covers/cover-arab.jpg'}
                       alt={song.title}
                       className="az-table-cover"
-                      onError={(e) => {
-                        e.currentTarget.src = '/covers/cover-arab.jpg';
-                      }}
                     />
                   </td>
                   <td>

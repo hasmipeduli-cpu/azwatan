@@ -82,6 +82,14 @@ export default function HomePage() {
 
   const showFeaturedSection = !searchQuery && selectedLanguage === 'Semua' && selectedType === 'Semua';
 
+  // When the Featured section is shown, the library below lists the
+  // remaining songs only — previously featured songs were rendered
+  // twice on the same page (once in each section).
+  const librarySongs = useMemo(() => {
+    if (!showFeaturedSection) return filteredSongs;
+    return filteredSongs.filter((s) => !s.featured);
+  }, [filteredSongs, showFeaturedSection]);
+
   const handleResetFilters = () => {
     setSearchQuery('');
     setSelectedLanguage('Semua');
@@ -115,15 +123,20 @@ export default function HomePage() {
           />
         )}
 
-        {/* Main Song Library */}
+        {/* Main Song Library — hidden when every song is featured,
+            so the page never shows a misleading empty state */}
+        {(!showFeaturedSection || isLoading || librarySongs.length > 0) && (
         <SongLibrary
-          songs={filteredSongs}
+          songs={librarySongs}
           isLoading={isLoading}
           searchQuery={searchQuery}
           selectedLanguage={selectedLanguage}
           selectedType={selectedType}
           onResetFilters={handleResetFilters}
+          titleOverride={showFeaturedSection && featuredSongs.length > 0 ? 'Nasyid Lainnya' : undefined}
+          queueSongs={filteredSongs}
         />
+        )}
       </div>
     </main>
   );

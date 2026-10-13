@@ -25,6 +25,22 @@
   }
 }
 
+/* Loading spinner used by the play/pause button while audio loads.
+   This class was referenced in PersistentBottomPlayer but was never
+   defined, so the icon rendered static. */
+.az-spin {
+  animation: az-spin 0.9s linear infinite;
+}
+
+@keyframes az-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .az-player-inner {
   display: flex;
   align-items: center;

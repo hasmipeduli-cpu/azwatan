@@ -10,6 +10,8 @@ export default function SongLibrary({
   selectedLanguage,
   selectedType,
   onResetFilters,
+  titleOverride,
+  queueSongs,
 }) {
   const isFiltered = searchQuery || selectedLanguage !== 'Semua' || selectedType !== 'Semua';
 
@@ -19,7 +21,7 @@ export default function SongLibrary({
         <div className="az-section-title-wrap">
           <span className="az-section-badge">Perpustakaan Audio</span>
           <h2 className="az-section-title">
-            {isFiltered ? 'Hasil Pencarian & Filter' : 'Semua Nasyid'}
+            {isFiltered ? 'Hasil Pencarian & Filter' : titleOverride || 'Semua Nasyid'}
           </h2>
         </div>
         {!isLoading && (
@@ -59,7 +61,7 @@ export default function SongLibrary({
         /* Song Cards Grid (PRD #14) */
         <div className="az-song-grid">
           {songs.map((song) => (
-            <SongCard key={song.id} song={song} currentQueue={songs} />
+            <SongCard key={song.id} song={song} currentQueue={queueSongs || songs} />
           ))}
         </div>
       )}
